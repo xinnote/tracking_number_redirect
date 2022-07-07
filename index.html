@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>
+        Search parcel
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Search parcel:</h1>
+    <div class="card">
+        <div class="card-body">
+            <form id="search_tracking">
+                <div class=" form-group row">
+                    <label for="tracking_number" class="col-sm-2 col-form-label">Enter number: </label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" name="tracking_number" id="tracking_number"
+                               placeholder="Tracking number">
+                    </div>
+                </div>
+                <button id="dhl" type="submit" class="btn btn-dark">DHL</button>
+                <button id="dpd" type="submit" class="btn btn-dark">DPD</button>
+                <button id="gls" type="submit" class="btn btn-dark">GLS</button>
+                <button id="bring" type="submit" class="btn btn-dark">Bring</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const number = document.getElementById("tracking_number"),
+            dhl_button = document.getElementById("dhl"),
+            dpd_button = document.getElementById("dpd"),
+            gls_button = document.getElementById("gls"),
+            bring_button = document.getElementById("bring");
+
+        dhl_button.addEventListener('click', getDhlUrl);
+        dpd_button.addEventListener('click', getDpdUrl);
+        gls_button.addEventListener('click', getGlsUrl);
+        bring_button.addEventListener('click', getBringUrl);
+
+        function getDhlUrl(e) {
+            const tracking_number = number.value,
+                url = "https://www.dhl.com/pl-pl/home/tracking.html?tracking-id=" + tracking_number + "&submit=1";
+
+            e.preventDefault();
+            window.open(
+                url, '_blank'
+            );
+        }
+
+        function getDpdUrl(e) {
+            const tracking_number = number.value,
+                url = "https://tracktrace.dpd.com.pl/parcelDetails?typ=1&p1=" + tracking_number;
+
+            e.preventDefault();
+            window.open(
+                url, '_blank'
+            );
+        }
+
+        function getGlsUrl(e) {
+            const tracking_number = number.value,
+                url = "https://www.gls-group.eu/276-I-PORTAL-WEB/content/GLS/PL01/PL/5004.htm?txtRefNo=" + tracking_number + "&txtAction=71000";
+
+            e.preventDefault();
+            window.open(
+                url, '_blank'
+            );
+        }
+
+        function getBringUrl(e) {
+            const tracking_number = number.value,
+                url = "https://tracking.bring.com/tracking/" + tracking_number;
+
+            e.preventDefault();
+            window.open(
+                url, '_blank'
+            );
+        }
+    });
+</script>
+</html>
